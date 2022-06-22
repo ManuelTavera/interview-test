@@ -12,6 +12,17 @@ export default function redurer(state, action) {
         items: [...state.items].filter(({ id }) => id !== action.payload),
       };
     }
+    case "update_todo": {
+      return {
+        ...state,
+        items: [...state.items].map((todo) => {
+          if (todo.id === action.payload.id) {
+            todo.text = action.payload.text;
+          }
+          return todo;
+        }),
+      };
+    }
     default: {
       return state;
     }

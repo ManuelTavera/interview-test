@@ -26,11 +26,22 @@ function App() {
     });
   };
 
+  const updateTodo = (newTodo) => {
+    dispatch({
+      type: "update_todo",
+      payload: newTodo,
+    });
+  };
+
   return (
     <div className="todo-container">
       <h1 className="todo-title">Todo List</h1>
       <TodoForm onSubmit={addTodo} />
-      <TodoList todoList={state.items} deleteTodo={deleteTodo} />
+      <TodoList
+        todoList={state.items}
+        deleteTodo={deleteTodo}
+        updateTodo={updateTodo}
+      />
     </div>
   );
 }

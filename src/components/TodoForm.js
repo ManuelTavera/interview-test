@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 export default function TodoForm(props) {
-  const { onSubmit } = props;
-  const [value, setValue] = useState("");
+  const { edit, onSubmit, todo } = props;
+  const [value, setValue] = useState(edit ? todo.text : "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,7 +10,7 @@ export default function TodoForm(props) {
     if (value) {
       onSubmit({
         text: value,
-        id: Date.now(),
+        id: edit ? todo.id : Date.now(),
       });
       setValue("");
     }
@@ -30,7 +30,7 @@ export default function TodoForm(props) {
         className="todo-input"
       />
       <button type="submit" className="add-btn">
-        Add
+        {edit ? "Update" : "Add"}
       </button>
     </form>
   );

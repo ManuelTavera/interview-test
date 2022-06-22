@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
+import TodoForm from "./TodoForm";
+
 export default function TodoTask(props) {
-  const { todo, deleteTodo } = props;
+  const { todo, deleteTodo, updateTodo } = props;
+  const [update, setUpdate] = useState(false);
+
+  const handleUpdate = () => {
+    setUpdate(true);
+  };
+
+  const handleSubmit = (todo) => {
+    updateTodo(todo);
+    setUpdate(false);
+  };
+
+  if (update) {
+    return <TodoForm onSubmit={handleSubmit} edit={true} todo={todo} />;
+  }
 
   return (
     <div className="todo-task-container">
@@ -13,7 +29,7 @@ export default function TodoTask(props) {
           className="icon icon-delete"
           onClick={() => deleteTodo(todo.id)}
         />
-        <TiEdit className="icon" />
+        <TiEdit className="icon" onClick={handleUpdate} />
       </div>
     </div>
   );
