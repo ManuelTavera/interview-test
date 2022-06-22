@@ -3,7 +3,7 @@ export default function redurer(state, action) {
     case "set_items": {
       return {
         ...state,
-        items: state.items.concat(action.payload.items),
+        items: [...state.items, action.payload],
       };
     }
     default: {

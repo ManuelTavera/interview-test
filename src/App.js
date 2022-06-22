@@ -1,8 +1,9 @@
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import "./App.css";
 import reducer from "./reducer";
 
-const DATA = ["item 1", "item 2", "item 3"];
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 const initialState = {
   items: [],
@@ -11,22 +12,18 @@ const initialState = {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
+  const addTodo = (todo) => {
     dispatch({
       type: "set_items",
-      payload: {
-        items: DATA,
-      },
+      payload: todo,
     });
-  });
+  };
 
   return (
-    <div className="App">
-      <ul className="items-container">
-        {state.items.map((item) => (
-          <li>{item}</li>
-        ))}
-      </ul>
+    <div className="todo-container">
+      <h1 className="todo-title">Todo List</h1>
+      <TodoForm onSubmit={addTodo} />
+      <TodoList todoList={state.items} />
     </div>
   );
 }
