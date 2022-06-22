@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import "./App.css";
 import reducer from "./reducer";
 
@@ -11,6 +11,12 @@ const initialState = {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    dispatch({
+      type: "get_todo_from_local_storage",
+    });
+  }, []);
 
   const addTodo = (todo) => {
     dispatch({
