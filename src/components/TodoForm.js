@@ -12,6 +12,7 @@ export default function TodoForm(props) {
         text: value,
         id: Date.now(),
       });
+      setValue("");
     }
   };
 

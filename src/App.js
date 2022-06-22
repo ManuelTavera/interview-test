@@ -19,11 +19,18 @@ function App() {
     });
   };
 
+  const deleteTodo = (id) => {
+    dispatch({
+      type: "delete_todo",
+      payload: id,
+    });
+  };
+
   return (
     <div className="todo-container">
       <h1 className="todo-title">Todo List</h1>
       <TodoForm onSubmit={addTodo} />
-      <TodoList todoList={state.items} />
+      <TodoList todoList={state.items} deleteTodo={deleteTodo} />
     </div>
   );
 }
